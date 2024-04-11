@@ -3,24 +3,30 @@ import java.util.Scanner;
 public class Ejercicio2 {
     public static void guess() {
         Scanner s = new Scanner(System.in);
-        int number1, number2;
+        int number; // Almacena el número introducido por el usuario
+        int count = 0; // Contador de intentos
+        int random = (int)Math.floor(Math.random()*100); // Genera un número aleatorio entre 0 y 99
+
+        // Bucle do-while para permitir que el usuario realice múltiples intentos
         do {
-            System.out.println("Introduce 2 números. (El primero tiene que ser menor que el segundo)");
-            number1 = s.nextInt();
-            number2 = s.nextInt();
-        } while (number2 < number1);
-
-        for (int i = number1;i <=number2; i++) {
-
-            if (i % 3 == 0 && i % 5 == 0) {
-                System.out.println(i + " es divisible por 3 y por 5");
-            } else if (i % 3 == 0) {
-                System.out.println(i + " es divisible por 3");
-            } else if (i % 5 == 0) {
-                System.out.println(i + " es divisible por 5");
+            System.out.println("Introduce un número: ");
+            number = s.nextInt();
+            // Comprueba si el número introducido es mayor o menor que el número aleatorio generado
+            if (number > random) {
+                System.out.println("Es menor");
+            } else if (number < random) {
+                System.out.println("Es mayor");
+                count++;
             } else {
-                System.out.println(i + " no es divisible ni por 3 ni por 5");
+                System.out.println("Acertaste!");
+                break;
             }
+        } while (count < 10); // El bucle se ejecuta mientras el contador de intentos sea menor que 10
+
+        // Si el usuario no adivina el número después de 10 intentos, muestra el número aleatorio
+        if (count == 10) {
+            System.out.println("Alcanzaste el número máximo de intentos");
+            System.out.println("El número era " + random);
         }
     }
 }
